@@ -43,8 +43,8 @@ class UserController {
       if(user == null)
         return response.status(404).json({error:'User not found!'});
 
-      const followers = await Follow.query().where('user_id', id).getCount()
-      const  following = await Follow.query().where('following', id).getCount()
+      const following = await Follow.query().where('user_id', id).getCount()
+      const followers  = await Follow.query().where('following', id).getCount()
       const repositories = await user.repositories().getCount()
      
       return{

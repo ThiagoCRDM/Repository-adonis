@@ -37,16 +37,12 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/', 'FollowingController.index').middleware(['auth'])  
   Route.post('/', 'FollowingController.store').middleware(['auth'])
-  Route.get('/:id', 'FollowingController.show').middleware(['auth'])
-  Route.delete('/:id', 'FollowingController.destroy').middleware(['auth'])
 }).prefix('/followings')
 
 Route.group(() => {
   Route.get('/', 'FollowerController.index').middleware(['auth'])
-  Route.get('/:id', 'FollowerController.show').middleware(['auth'])
 }).prefix('/followers')
 
 Route.group(() => {
   Route.post('/', 'StarController.store').middleware(['auth'])
-  Route.delete('/:id', 'StarController.destroy').middleware(['auth'])
 }).prefix('/stars')

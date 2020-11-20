@@ -47,32 +47,6 @@ class FollowingController {
     }
   }
 
-  async show({params, response}){
-    const { id } = params
-    try {
-      const follow = await Follow.find(id)
-      if(follow == null)
-        return response.status(404).json({error:'Follower not found'})
-
-      const userFollower = await User.findOrFail(follow.following)
-      
-     
-      const  followers = await Follow.query().where('user_id', follow.user_id).getCount()
-      const  following = await Follow.query().where('following', follow.user_id).getCount()
-      const repositories = await userFollower.repositories().getCount()
-      return {
-        data: userFollower,
-        followers, 
-        following,  
-        repositories,
-        count
-      }
-    } catch (error) {
-      console.error(error)
-      return response.status(404).json({error:'Follower not found'})
-    }    
-  }
-
 }
 
 module.exports = FollowingController
